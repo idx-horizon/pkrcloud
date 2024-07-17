@@ -13,7 +13,12 @@ import datetime
 import random
 import re
 
-STATIC_FOLDER = './pkr/static'
+from app.classes import MyWordCloud
+from app.config import get_themes, STATIC_FOLDER
+
+os.chdir('..')
+
+xSTATIC_FOLDER = './pkr/static'
 
 def hsl_to_hex(h, s, l):
     import colorsys
