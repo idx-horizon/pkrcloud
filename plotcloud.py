@@ -15,6 +15,7 @@ import re
 
 from app.classes import MyWordCloud
 from app.config import get_themes, STATIC_FOLDER
+import app.data
 
 os.chdir('..')
 
@@ -60,7 +61,7 @@ def rank_simple(lst):
 
 def produce(id, destination, maskfile):
 
-    data, title, event_count = getdata(id)
+    data, title, event_count = app.data.getdata(id)
     c = Counter([x['Event'] for x in data])
 
     c[f'Events: {event_count}'] =  10
@@ -91,7 +92,7 @@ def produce(id, destination, maskfile):
                     color_func=weighted_color_func,
                     background_color ='white',
                     mask=mask,
-                    contour_color=hsl_to_hex(0,100,30),   # 'darkgreen',
+                    contour_color=hsl_to_hex(0,100,30),
                     contour_width=20,
                     stopwords = stopwords,
                     relative_scaling = 0.45,
