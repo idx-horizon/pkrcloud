@@ -13,7 +13,7 @@ def getdata(id):
         data = json.loads(f.read())
         d = data[1]['runs'] # [1] = the runs, [0] = countries
         event_count = len(set([x['Event'] for x in d]))
-        title = data['title']
+        title = data[1]['title']
 #        return data[1]['runs'], data[1]['title'], event_count
 
     c = Counter([x['Event'] for x in d])
