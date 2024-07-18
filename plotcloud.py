@@ -63,7 +63,7 @@ def produce(id, destination, maskfile):
 
     c = app.data.getdata(id)
  
-    print(runner_id, runner_name, pb)
+#    print(runner_id, runner_name, pb)
 
     mask = np.array(Image.open(maskfile))
     stopwords={}
