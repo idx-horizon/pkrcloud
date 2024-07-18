@@ -1,4 +1,12 @@
 import json
+from collections import Counter
+
+def convert_to_seconds(tm):
+    if len(tm) > 5:
+        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[3600,60,1])]))
+    else:
+        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[60,1])]))
+
 
 def getdata(id):
     with open(f'{id}.pkr','r',encoding='utf-8') as f:

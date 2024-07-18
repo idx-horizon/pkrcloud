@@ -43,18 +43,18 @@ def weighted_color_func(word, font_size, position, orientation, random_state=Non
     elif chosen_color == 'black':
         return "hsl(0,0%,0%)"
 
-def getdata(id):
-    print(id)
-    with open(f'{id}.pkr','r',encoding='utf-8') as f:
-        data = json.loads(f.read())
-        event_count = len(set([x['Event'] for x in data[1]['runs']]))
-        return data[1]['runs'], data[1]['title'], event_count
-
-def convert_to_seconds(tm):
-    if len(tm) > 5:
-        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[3600,60,1])]))
-    else:
-        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[60,1])]))
+#def getdata(id):
+#    print(id)
+#    with open(f'{id}.pkr','r',encoding='utf-8') as f:
+#        data = json.loads(f.read())
+#        event_count = len(set([x['Event'] for x in data[1]['runs']]))
+#        return data[1]['runs'], data[1]['title'], event_count
+#
+#def convert_to_seconds(tm):
+#    if len(tm) > 5:
+#        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[3600,60,1])]))
+#    else:
+#        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[60,1])]))
 
 def rank_simple(lst):
      return sorted(range(len(lst)), key=lst.__getitem__)
