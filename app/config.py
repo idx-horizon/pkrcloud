@@ -1,4 +1,5 @@
 import re
+import random
 
 STATIC_FOLDER = '/home/idx/pkr/static'
 
@@ -7,10 +8,10 @@ def get_themes():
 
 def my_colour_func(word, font_size, position, orientation, random_state=None, **kwargs):
 
-    color_weights = ['red'] * 6 + 
-                    ['green'] * 4 + 
-                    ['yellow'] * 2 +
-                    ['blue'] * 2 + 
+    color_weights = ['red'] * 6 +     \
+                    ['green'] * 4 +   \
+                    ['yellow'] * 2 +  \
+                    ['blue'] * 2 +    \
                     ['black'] * 0
                     
     chosen_color = random.choice(color_weights)
