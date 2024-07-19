@@ -19,7 +19,7 @@ def swatch(c):
     'ruby':  hsl_to_hex(0,100,30)
   }
   
-  return colours(c)  
+  return colours[c]  
 
 def my_colour_func(word, font_size, position, orientation, random_state=None, **kwargs):
 
