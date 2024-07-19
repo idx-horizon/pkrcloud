@@ -14,47 +14,17 @@ import random
 import re
 
 from app.classes import MyWordCloud
-from app.config import get_themes, STATIC_FOLDER
+from app.config import get_themes, STATIC_FOLDER, my_colour_func
 import app.data
 
 os.chdir('..')
-
-xSTATIC_FOLDER = './pkr/static'
 
 def hsl_to_hex(h, s, l):
     import colorsys
     rgb = colorsys.hls_to_rgb(h / 360.0, l / 100.0, s / 100.0)
     return '#{:02x}{:02x}{:02x}'.format(int(rgb[0] * 255), int(rgb[1] * 255), int(rgb[2] * 255))
 
-def weighted_color_func(word, font_size, position, orientation, random_state=None, **kwargs):
-    # Weights for colors: red is more likely to be chosen
-    color_weights = ['red'] * 8 + ['green'] * 5 + ['yellow'] * 2 + ['black'] * 2
-    chosen_color = random.choice(color_weights)
-    if word in ['2010','2011','2012','2013','2014','2015','2016','2017','2018',
-                '2019','2020','2021','2022','2023','2024']:
-        chosen_color ='black'
 
-    if chosen_color == 'red':
-        return "hsl(0, 100%, {}%)".format(random.randint(20, 40))
-    elif chosen_color == 'green':
-        return "hsl(100, 100%, {}%)".format(random.randint(20, 35))
-    elif chosen_color == 'yellow':
-        return "hsl(50, 100%, {}%)".format(random.randint(20, 40))
-    elif chosen_color == 'black':
-        return "hsl(0,0%,0%)"
-
-#def getdata(id):
-#    print(id)
-#    with open(f'{id}.pkr','r',encoding='utf-8') as f:
-#        data = json.loads(f.read())
-#        event_count = len(set([x['Event'] for x in data[1]['runs']]))
-#        return data[1]['runs'], data[1]['title'], event_count
-#
-#def convert_to_seconds(tm):
-#    if len(tm) > 5:
-#        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[3600,60,1])]))
-#    else:
-#        return int(sum([float(a)*float(b) for a,b in zip(tm.split(':'),[60,1])]))
 
 def rank_simple(lst):
      return sorted(range(len(lst)), key=lst.__getitem__)
@@ -63,12 +33,10 @@ def produce(id, destination, maskfile):
 
     c = app.data.getdata(id)
  
-#    print(runner_id, runner_name, pb)
-
     mask = np.array(Image.open(maskfile))
     stopwords={}
     wordcloud = WordCloud(width = 2000, height = 1200,
-                    color_func=weighted_color_func,
+                    color_func=my_colour_func,
                     background_color ='white',
                     mask=mask,
                     contour_color=hsl_to_hex(0,100,30),
@@ -81,7 +49,7 @@ def produce(id, destination, maskfile):
     wordcloud_image = wordcloud.to_image()
 
     border_color = hsl_to_hex(0,100,30) 
-    border_width = 5  # Adjust the border width as needed
+    border_width = 5  
     bordered_image = ImageOps.expand(wordcloud_image,
                                      border=border_width,
                                      fill=border_color)
