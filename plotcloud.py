@@ -14,7 +14,7 @@ import random
 import re
 
 from app.classes import MyWordCloud
-from app.config import get_themes, STATIC_FOLDER, my_colour_func
+from app.config import swatch, STATIC_FOLDER, my_colour_func
 import app.data
 
 os.chdir('..')
@@ -37,9 +37,9 @@ def produce(id, destination, maskfile):
     stopwords={}
     wordcloud = WordCloud(width = 2000, height = 1200,
                     color_func=my_colour_func,
-                    background_color ='white',
+                    background_color = swatch('cream'), #'white',
                     mask=mask,
-                    contour_color=hsl_to_hex(0,100,30),
+                    contour_color= swatch('ruby') # hsl_to_hex(0,100,30),
                     contour_width=20,
                     stopwords = stopwords,
                     relative_scaling = 0.45,
@@ -48,7 +48,7 @@ def produce(id, destination, maskfile):
 
     wordcloud_image = wordcloud.to_image()
 
-    border_color = hsl_to_hex(0,100,30) 
+    border_color = swatch('ruby') # hsl_to_hex(0,100,30) 
     border_width = 5  
     bordered_image = ImageOps.expand(wordcloud_image,
                                      border=border_width,
