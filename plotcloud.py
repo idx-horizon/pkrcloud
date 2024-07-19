@@ -39,7 +39,7 @@ def produce(id, destination, maskfile):
                     color_func=my_colour_func,
                     background_color = swatch('cream'), #'white',
                     mask=mask,
-                    contour_color= swatch('ruby') # hsl_to_hex(0,100,30),
+                    contour_color= swatch('ruby'), # hsl_to_hex(0,100,30),
                     contour_width=20,
                     stopwords = stopwords,
                     relative_scaling = 0.45,
